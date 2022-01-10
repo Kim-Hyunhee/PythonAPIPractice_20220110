@@ -42,6 +42,9 @@ class MainActivity : BaseActivity() {
                         ).show()
 
                     }
+                    else {
+
+                    }
 
                 }
 
