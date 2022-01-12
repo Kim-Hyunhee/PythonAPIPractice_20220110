@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import com.nepplus.pythonapipractice_20220110.models.BasicResponse
+import com.nepplus.pythonapipractice_20220110.utils.ContextUtil
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_sign_up.edtEmail
 import kotlinx.android.synthetic.main.activity_sign_up.edtPassword
@@ -42,6 +43,8 @@ class LoginActivity : BaseActivity() {
                             "${br.data.user.nickname}님 환영합니다!",
                             Toast.LENGTH_SHORT
                         ).show()
+
+                        ContextUtil.setUserId(mContext, br.data.user.id)
 
                         val myIntent = Intent(mContext, MainActivity::class.java)
                         startActivity(myIntent)
