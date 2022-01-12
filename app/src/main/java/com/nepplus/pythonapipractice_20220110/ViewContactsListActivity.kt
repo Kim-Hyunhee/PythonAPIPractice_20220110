@@ -2,10 +2,14 @@ package com.nepplus.pythonapipractice_20220110
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.nepplus.pythonapipractice_20220110.models.BasicResponse
 import com.nepplus.pythonapipractice_20220110.models.ContactData
 import com.nepplus.pythonapipractice_20220110.utils.ContextUtil
+import com.neppplus.phoneorderapp_20220105.adapters.ContactAdapter
+import kotlinx.android.synthetic.main.activity_view_contacts_list.*
 import retrofit2.Call
+import retrofit2.CallAdapter
 import retrofit2.Callback
 import retrofit2.Response
 
@@ -13,9 +17,15 @@ class ViewContactsListActivity : BaseActivity() {
 
     val mContactList = ArrayList<ContactData>()
 
+    lateinit var mAdapter: ContactAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_contacts_list)
+
+        mAdapter = ContactAdapter(mContext, mContactList)
+        contactRecyclerView.adapter = mAdapter
+        contactRecyclerView.layoutManager = LinearLayoutManager(mContext)
 
         apiList.getRequestContactList(
             ContextUtil.getUserId(mContext)
@@ -25,6 +35,7 @@ class ViewContactsListActivity : BaseActivity() {
                 if (response.isSuccessful) {
                     val br = response.body()!!
                     mContactList.addAll(br.data.contacts)
+                    mAdapter.notifyDataSetChanged()
                 }
 
             }
