@@ -6,6 +6,10 @@ import android.os.Bundle
 import android.widget.Toast
 import com.nepplus.pythonapipractice_20220110.models.BasicResponse
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.edtEmail
+import kotlinx.android.synthetic.main.activity_main.edtPassword
+import kotlinx.android.synthetic.main.activity_sign_up.*
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -43,6 +47,10 @@ class MainActivity : BaseActivity() {
 
                     }
                     else {
+
+                        val jsonObj = JSONObject( response.errorBody()!!.string() )
+
+                        Toast.makeText(mContext, jsonObj.getString("message"), Toast.LENGTH_SHORT).show()
 
                     }
 
