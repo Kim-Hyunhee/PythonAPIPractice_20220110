@@ -14,5 +14,11 @@ class MainActivity : BaseActivity() {
             val myIntent = Intent(mContext, EditContactActivity::class.java)
             startActivity(myIntent)
         }
+
+        btnGetAllContact.setOnClickListener {
+
+            val myIntent = Intent(mContext, ViewContactsListActivity::class.java)
+            startActivity(myIntent)
+        }
     }
 }
